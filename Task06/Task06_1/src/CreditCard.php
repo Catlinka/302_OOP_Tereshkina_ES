@@ -4,17 +4,22 @@ namespace App;
 
 class CreditCard
 {
-    private $number;
-    private $expiration;
-
-    public function __construct($number, $expiration)
+    private $cardNumber;
+    private $cardDate;
+    private $bill;
+    public function __construct($cardNumber, $cardDate)
     {
-        $this->number = $number;
-        $this->expiration = $expiration;
+        $this->cardNumber = $cardNumber;
+        $this->cardDate = $cardDate;
+        $this->bill = 500;
     }
-
-    public function authorizeTransaction($amount)
+    public function transfer($amount)
     {
-        return "Authorization code: 234da";
+        if ((0 < $amount) && ($amount < $this->bill)) {
+            $this->bill -= $amount;
+            return "Authorization code: 123456";
+        } else {
+            return "";
+        }
     }
 }

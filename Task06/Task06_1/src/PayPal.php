@@ -6,15 +6,20 @@ class PayPal
 {
     private $email;
     private $password;
-
+    private $bill;
     public function __construct($email, $password)
     {
         $this->email = $email;
         $this->password = $password;
+        $this->bill = 500;
     }
-
-    public function transfer($email, $amount)
+    public function authorizeTransaction($amount)
     {
-        return "Paypal Success!";
+        if ((0 < $amount) && ($amount < $this->bill)) {
+            $this->bill -= $amount;
+            return "PayPal Success!";
+        } else {
+            return "Failure";
+        }
     }
 }
